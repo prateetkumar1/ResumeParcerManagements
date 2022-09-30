@@ -1,0 +1,58 @@
+<div class="pt-5"></div>
+
+<!-- <p-toast></p-toast> -->
+
+
+<div class="grid">
+    <div class="col-12 md:col-6 lg:col-3 sm:flex-nowrap mx-auto">
+        <!-- <div class="box"> -->
+        <p-panel>
+            <ng-template pTemplate="header" style="align-content: center;">
+                Resume Status
+            </ng-template>
+
+            <form (ngSubmit)="statusForm.form.valid && onSubmit()" #statusForm="ngForm" autocomplete="off">
+                <!-- STATUSNAME -->
+                <div class="p-field pt-3">
+                    <label for="statusName">Status Name</label>
+                    <input id="statusName" type="statusName" aria-describedby="statusName-help" class="p-invalid"
+                        name="statusName" #un="ngModel" required pInputText
+                        [(ngModel)]="resumeStatusAddModel.statusName" />
+                    <small id="statusName-help" class="p-invalid"
+                        *ngIf="statusForm.submitted && un.errors?.['required']">Status Name is not valid.</small>
+                </div>
+                <!-- SHORTNAME -->
+                <div class="p-field pt-3">
+                    <label for="shortName">Short name</label>
+                    <input id="shortName" type="shortName" aria-describedby="shortName-help" class="p-invalid"
+                        name="shortName" #pw="ngModel" required pInputText
+                        [(ngModel)]="resumeStatusAddModel.statusCode" />
+                    <small id="shortName-help" class="p-invalid"
+                        *ngIf="statusForm.submitted && pw.errors?.['required']">Short Name is not available.</small>
+                </div>
+                <!-- SUBMIT BUTTON -->
+                <div class="p-field pt-3">
+                    <div class="grid">
+                        <div class="md:col-6">
+                            <p-button label="Submit" icon="pi pi-check" iconPos="left" type="submit"
+                                class="float-right">
+                            </p-button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </p-panel>
+        <!-- </div> -->
+    </div>
+</div>
+
+
+<!-- <div class="grid">
+    <div class="col-12 md:col-6 lg:col-3 sm:flex-nowrap">A</div>
+    <div class="col-12 md:col-6 lg:col-3">B</div>
+    <div class="col-12 md:col-6 lg:col-3">C</div>
+    <div class="col-12 md:col-6 lg:col-3">D</div>
+</div>
+
+<span>LAST UPDATED ON 06-09-2022T20:08</span> -->

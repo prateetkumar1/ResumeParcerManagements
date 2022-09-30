@@ -1,0 +1,103 @@
+<div class="pt-4"></div>
+<!-- <div class="container"> -->
+<div>
+    <p-panel>
+        <ng-template pTemplate="header">
+            <div class="text-center">
+                <h3>Resume List</h3>
+            </div>
+        </ng-template>
+        <p-table #dt [value]="resumes" [resizableColumns]="true" styleClass="p-datatable-gridlines"
+            responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[10,25,50]">
+            <!-- <ng-template pTemplate="caption">
+                <div class="p-d-flex">
+                    <span class="p-input-icon-left p-ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                    </span>
+                </div>
+            </ng-template> -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="details.firstName">Name
+                        <p-sortIcon field="details.firstName"></p-sortIcon>
+                        <p-columnFilter type="text" field="details.firstName" display="menu"></p-columnFilter>
+                    </th>
+                    <th pSortableColumn="details.emailAddress">Email
+                        <p-sortIcon field="details.emailAddress"></p-sortIcon>
+                        <p-columnFilter type="text" field="details.emailAddress" display="menu"></p-columnFilter>
+                    </th>
+                    <th pSortableColumn="details.phoneNumbers">Mobile number
+                        <p-sortIcon field="details.phoneNumbers"></p-sortIcon>
+                        <p-columnFilter type="text" field="details.phoneNumbers" display="menu"></p-columnFilter>
+                    </th>
+                    <th pSortableColumn="details.workExperience">Tech-stack
+                        <p-sortIcon field="details.workExperience"></p-sortIcon>
+                        <p-columnFilter type="text" field="details.workExperience" display="menu"></p-columnFilter>
+                    </th>
+                    <th>Download</th>
+                    <!-- <th>View</th> -->
+                    <th>Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-resumeData>
+                <tr>
+                    <td>{{resumeData.details.firstName || np}}</td>
+                    <td>{{resumeData.details.emailAddress || np}}</td>
+                    <td>{{resumeData.details.phoneNumbers || np}}</td>
+                    <td>
+                        {{displayMinimumLetters(resumeData.details.workExperience) || np}}...
+                        <!-- <p-button (click)="showBasicDialog(resumeData.details.workExperience);" icon="pi pi-external-link" label="Show"></p-button> -->
+                        <button style="padding: 0rem;" pButton type="button"
+                            (click)="showBasicDialog(resumeData.details.workExperience);" label="Read more"
+                            class="p-button-text"></button>
+                        <!-- <div *ngFor="let item of resumeData.details.workExperience">
+                            <p>{{item}}</p>
+                        </div> -->
+                    </td>
+                    <td>
+                        <button type="button" pButton pRipple icon="pi pi-file-pdf" class="p-mr-2" pTooltip="PDF"
+                            (click)="downloadFiles(resumeData)" tooltipPosition="bottom"></button>
+                        <!-- (click)="exportToPDF(resumeData)" -->
+                        <!-- &nbsp;
+                        <button type="button" pButton pRipple icon="pi pi-file-excel" class="p-button-success p-mr-2"
+                            pTooltip="XLS" tooltipPosition="bottom" (click)="exportToExcel(resumeData);"></button> -->
+                    </td>
+                    <!-- <td>
+                        <button pButton pRipple type="button" icon="pi pi-eye" (click)="viewResume(resumeData);"
+                            routerLinkActive="router-link-active" pTooltip="View" disabled
+                            class="p-button-secondary p-button-outlined"></button>
+                    </td> -->
+                    <td>
+                        <!-- <p-dropdown [options]="resumeStatusList" [(ngModel)]="resumeData.details.resumeStatus.id"
+                            optionLabel="status"></p-dropdown> -->
+                        <!--  -->
+                        <!--   -->
+                        <select (change)="onStatusChange(resumeData)"
+                            style="height: 49px;font-size: 1rem;color: #495057;border-radius: 5px;"
+                            [(ngModel)]="resumeData.details.resumeStatus.id" [ngStyle]="{'color': getLeaveCode(resumeData.details.resumeStatus.id)}">
+                            <option *ngFor="let item of resumeStatusList" [value]="item.id"
+                                class="p-element p-dropdown-label p-inputtext" style="height: 50px !important;">
+                                {{item.statusName}}</option>
+                        </select>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+</div>
+<!-- </div> -->
+
+<p-dialog header="Experience" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <div *ngFor="let item of modalData;let i = index;">
+        <p>{{i + 1}})&nbsp;{{item}}</p>
+    </div>
+    <!-- <div>
+        {{modalData}}
+    </div> -->
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-times" (click)="displayBasic=false" label="Close"></p-button>
+    </ng-template>
+</p-dialog>

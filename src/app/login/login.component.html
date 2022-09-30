@@ -1,0 +1,60 @@
+<div class="pt-5"></div>
+
+<p-toast></p-toast>
+
+
+<div class="grid">
+    <div class="col-12 md:col-6 lg:col-3 sm:flex-nowrap mx-auto">
+        <!-- <div class="box"> -->
+        <p-panel>
+            <ng-template pTemplate="header" style="align-content: center;">
+                Login
+            </ng-template>
+
+            <form (ngSubmit)="loginForm.form.valid && onSubmit()" #loginForm="ngForm">
+                <!-- USERNAME -->
+                <div class="p-field pt-3">
+                    <label for="username">Username</label>
+                    <input id="username" type="username" aria-describedby="username-help" class="p-invalid"
+                        name="username" #un="ngModel" required pInputText [(ngModel)]="loginModel.username" />
+                    <small id="username-help" class="p-invalid"
+                        *ngIf="loginForm.submitted && un.errors?.['required']">Username is not valid.</small>
+                </div>
+                <!-- PASSWORD -->
+                <div class="p-field pt-3">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" aria-describedby="password-help" class="p-invalid"
+                        name="password" #pw="ngModel" required pInputText [(ngModel)]="loginModel.password" />
+                    <small id="password-help" class="p-invalid"
+                        *ngIf="loginForm.submitted && pw.errors?.['required']">Password is not available.</small>
+                </div>
+                <!-- SUBMIT BUTTON -->
+                <div class="p-field pt-3">
+                    <div class="grid">
+                        <div class="md:col-6">
+                            <p-button label="Submit" icon="pi pi-check" iconPos="left" type="submit" class="float-right">
+                            </p-button>
+                        </div>
+                        <div class="md:col-6">
+                            <p-button label="Register" icon="pi pi-times" iconPos="left" type="button"
+                                class="float-right" [routerLink]="['/register']">
+                            </p-button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </p-panel>
+        <!-- </div> -->
+    </div>
+</div>
+
+
+<!-- <div class="grid">
+    <div class="col-12 md:col-6 lg:col-3 sm:flex-nowrap">A</div>
+    <div class="col-12 md:col-6 lg:col-3">B</div>
+    <div class="col-12 md:col-6 lg:col-3">C</div>
+    <div class="col-12 md:col-6 lg:col-3">D</div>
+</div>
+
+<span>LAST UPDATED ON 06-09-2022T20:08</span> -->

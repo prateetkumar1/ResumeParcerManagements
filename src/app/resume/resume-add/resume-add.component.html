@@ -1,0 +1,63 @@
+<div class="pt-5"></div>
+<p-toast></p-toast>
+<div class="grid">
+    <div class="col-12 md:col-6 lg:col-4 sm:flex-nowrap mx-auto">
+        <!-- <div class="box"> -->
+        <p-panel>
+            <ng-template pTemplate="header" style="align-content: center;">
+                Resume Add
+            </ng-template>
+
+            <form (ngSubmit)="resumeAddForm.form.valid && onSubmit()" #resumeAddForm="ngForm" autocomplete="off">
+                <!-- Name -->
+                <div class="p-field pt-3">
+                    <label for="candidateName">Candidate Name</label>
+                    <input id="candidateName" type="username" aria-describedby="candidateName-help" class="p-invalid"
+                        name="candidateName" #un="ngModel" required pInputText [(ngModel)]="resumeAddModel.candidateName" />
+                    <small id="candidateName-help" class="p-invalid"
+                        *ngIf="resumeAddForm.submitted && un.errors?.['required']">Candidate Name is not valid.</small>
+                </div>
+                <!-- Mobile number -->
+                <div class="p-field pt-3">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input id="mobileNumber" type="username" aria-describedby="mobileNumber-help" class="p-invalid"
+                        name="mobileNumber" #un="ngModel" required pInputText [(ngModel)]="resumeAddModel.mobileNumber" />
+                    <small id="mobileNumber-help" class="p-invalid"
+                        *ngIf="resumeAddForm.submitted && un.errors?.['required']">Mobile Number is not valid.</small>
+                </div>
+                <!-- Name -->
+                <div class="p-field pt-3">
+                    <label for="emailID">EmailID</label>
+                    <input id="emailID" type="username" aria-describedby="emailID-help" class="p-invalid"
+                        name="emailID" #un="ngModel" required pInputText [(ngModel)]="resumeAddModel.emailID" />
+                    <small id="emailID-help" class="p-invalid"
+                        *ngIf="resumeAddForm.submitted && un.errors?.['required']">Email ID is not valid.</small>
+                </div>
+                <!-- UPLOAD -->
+                <div class="p-field pt-3">
+                    <label for="upload">Resume Upload</label>
+                    <p-fileUpload [auto]="false"
+                        (onSelect)="onUpload($event)" styleClass="cfn-uploader" ngDefaultControl>
+                        <ng-template pTemplate="content">
+                            <!-- <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}}</li>
+                            </ul> -->
+                        </ng-template>
+                    </p-fileUpload>
+                </div>
+                <!-- SUBMIT BUTTON -->
+                <div class="p-field pt-3">
+                    <div class="grid">
+                        <div class="md:col-6">
+                            <p-button label="Submit" icon="pi pi-check" iconPos="left" type="submit"
+                                class="float-right">
+                            </p-button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </p-panel>
+        <!-- </div> -->
+    </div>
+</div>
